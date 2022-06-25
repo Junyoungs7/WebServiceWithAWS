@@ -1,9 +1,17 @@
 {{>layout/header}}
     <h1>start webservice with spring boot Ver.2</h1>
+
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">
                 <a href="/posts/save" role="button" class="btn btn-primary"> contents submit</a>
+                {{#LoginUserName}}
+                    Logged in as: <span id="users">{{LoginUserName}}</span>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                {{/LoginUserName}}
+                {{^LoginUserName}}
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                {{/LoginUserName}}
             </div>
         </div>
         <br>
