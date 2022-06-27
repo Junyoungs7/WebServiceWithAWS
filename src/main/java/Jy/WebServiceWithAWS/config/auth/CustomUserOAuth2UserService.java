@@ -34,11 +34,15 @@ public class CustomUserOAuth2UserService implements OAuth2UserService<OAuth2User
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        Users users = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(users));
+        Users usersInfo = saveOrUpdate(attributes);
+
+        //System.out.println("1: " + usersInfo.getName() + " " + usersInfo.getEmail());
+        httpSession.setAttribute("userinfo", new SessionUser(usersInfo));
+        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("userinfo");
+        //System.out.println("2: " + sessionUser.getName() + " " + sessionUser.getEmail());
 
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(users.getRoleKey())),
+                Collections.singleton(new SimpleGrantedAuthority(usersInfo.getRoleKey())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey()
         );
@@ -49,6 +53,7 @@ public class CustomUserOAuth2UserService implements OAuth2UserService<OAuth2User
                 .map(entity -> entity.updates(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
 
+        //System.out.println("1: " + users.getName() + " " + users.getEmail() + " " + users.getEmail());
         return userRepository.save(users);
     }
 }

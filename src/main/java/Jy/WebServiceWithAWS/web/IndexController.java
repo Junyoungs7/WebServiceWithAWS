@@ -22,10 +22,10 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        SessionUser user = (SessionUser) httpSession.getAttribute("userinfo");
 
         if(user != null){
-            model.addAttribute("LoginUserName", user.getName());
+            model.addAttribute("LoginUserName", user.getEmail());
         }
         return "index";
     }
