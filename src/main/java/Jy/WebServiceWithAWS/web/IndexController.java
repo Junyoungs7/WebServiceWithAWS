@@ -1,5 +1,6 @@
 package Jy.WebServiceWithAWS.web;
 
+import Jy.WebServiceWithAWS.config.auth.LoginUser;
 import Jy.WebServiceWithAWS.config.auth.dto.SessionUser;
 import Jy.WebServiceWithAWS.service.posts.PostsService;
 import Jy.WebServiceWithAWS.web.dto.PostsResponseDto;
@@ -17,12 +18,11 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
+    //private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("userinfo");
 
         if(user != null){
             model.addAttribute("LoginUserName", user.getEmail());

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,6 +20,7 @@ class HelloControllerTest {
     private MockMvc Mvc;
 
     @Test
+    @WithMockUser(roles = "USER")
     public void hello_return() throws Exception{
         String hello = "hello";
 
@@ -28,6 +30,7 @@ class HelloControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void helloDto_return() throws Exception{
         String name = "hello";
         int amount = 1000;
