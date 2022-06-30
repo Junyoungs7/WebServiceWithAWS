@@ -36,6 +36,7 @@ deploy:
     key: freelc-webservice-springboot2.zip
     bundle_type: zip
     application: webservice-springboot
+    deployment_group: webservice-springboot-group
     region: ap-northeast-2
     wait-until-deployed: true
 
