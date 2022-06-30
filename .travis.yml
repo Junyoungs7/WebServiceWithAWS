@@ -14,7 +14,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r freelc-webservice-springboot2 WebServiceWithAWS
+  - zip -r freelc-webservice-springboot2 *
   - mkdir -p deploy
   - mv freelc-webservice-springboot2.zip deploy/freelc-webservice-springboot2.zip
 
